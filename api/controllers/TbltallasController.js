@@ -11,6 +11,11 @@ Procedures.querys = async (req, res)=>{
     let resultado = Object();
     console.log("***", params);
 	resultado = await QuerysServices(Tbltallas, params);
+	try {
+		for( let item of resultado.data ) item.tal_descripcion = Number( item.tal_descripcion ) || String( item.tal_descripcion )
+		resultado.data = _.orderBy( resultado.data , ['tal_descripcion'], ['DEC'] );
+		resultado.data = _.orderBy( resultado.data , ['ordenar'], ['ASC'] );
+	} catch (error) { console.log("CONTROLADO ERROR", error)}
 	return res.ok(resultado);
 }
 module.exports = Procedures;
