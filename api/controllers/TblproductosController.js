@@ -45,30 +45,51 @@ Procedures.comentarios = async ( id )=>{
 	let dataFinix = [];
 	dataFinix =  [
 		{
-			nombre: "Antonio",
+			nombre: "Andrea",
 			fecha: new moment().format("DD/MM/YYYY"),
-			descripcion: "Producto genial muy util y facil de usar.",
+			descripcion: "Los compré y me encantaron tienen una horma levanta cola los recomiendo mucho🤩👏",
 			posicion: _.random(0, 10),
 			foto: "./assets/noimagen.jpg"
 		},
 		{
-			nombre: "Carlos montaño",
-			fecha: (new moment().add(-1, 'days')).format("DD/MM/YYYY"),
-			descripcion: "Me Encanto en Todas Formas Recomendado.",
+			nombre: "Camila",
+			fecha: new moment().format("DD/MM/YYYY"),
+			descripcion: "Me gustaron demasiado la tela es muy cómoda y suave ✅",
 			posicion: _.random(0, 10),
 			foto: "./assets/noimagen.jpg"
 		},
 		{
-			nombre: "Rafael",
-			fecha: (new moment().add(-2, 'days')).format("DD/MM/YYYY"),
-			descripcion: "LLego muy rapido y me encanto.",
+			nombre: "Natalia",
+			fecha: new moment().format("DD/MM/YYYY"),
+			descripcion: "Yo los compré y me encantaron la tela es Strech levanta cola los recomiendo ",
 			posicion: _.random(0, 10),
 			foto: "./assets/noimagen.jpg"
 		},
 		{
-			nombre: "Estafany",
+			nombre: "Andreína",
+			fecha: new moment().format("DD/MM/YYYY"),
+			descripcion: "Cumplieron con todas mis expectativas son hermosos esos jeans👌😍",
+			posicion: _.random(0, 10),
+			foto: "./assets/noimagen.jpg"
+		},
+		{
+			nombre: "Alexandra",
+			fecha: new moment().format("DD/MM/YYYY"),
+			descripcion: "Gracias me gustaron demasiado 👏👏👏",
+			posicion: _.random(0, 10),
+			foto: "./assets/noimagen.jpg"
+		},
+		{
+			nombre: "Paola",
+			fecha: new moment().format("DD/MM/YYYY"),
+			descripcion: "Me parecieron hermosos esta semana les voy a volver a comprar🙌🤩",
+			posicion: _.random(0, 10),
+			foto: "./assets/noimagen.jpg"
+		},
+		{
+			nombre: "Estefany",
 			fecha: (new moment().add(-3, 'days')).format("DD/MM/YYYY"),
-			descripcion: "A mi esposo le gusto saludos.",
+			descripcion: "A mi me gustaron saludos.",
 			posicion: _.random(0, 10),
 			foto: "./assets/noimagen.jpg"
 		},
@@ -79,35 +100,81 @@ Procedures.comentarios = async ( id )=>{
 			posicion: _.random(0, 10),
 			foto: "./assets/noimagen.jpg"
 		},
-		{
-			nombre: "Jose",
-			fecha: (new moment().add(-5, 'days')).format("DD/MM/YYYY"),
-			descripcion: "Gracias Tienda Recomendado.",
-			posicion: _.random(0, 10),
-			foto: "./assets/noimagen.jpg"
-		},
+		
 		{
 			nombre: "Olga",
 			fecha: (new moment().add(-6, 'days')).format("DD/MM/YYYY"),
-			descripcion: "Tenia Miedo alcomprar pero me llego bien gracias.",
+			descripcion: "Tenia Miedo al comprar pero me llego bien gracias.",
 			posicion: _.random(0, 10),
 			foto: "./assets/noimagen.jpg"
 		},
-		{
-			nombre: "Cristian",
-			fecha: (new moment().add(-7, 'days')).format("DD/MM/YYYY"),
-			descripcion: "Gracias tienda recomendad.",
-			posicion: _.random(0, 10),
-			foto: "./assets/noimagen.jpg"
-		},
-		{
-			nombre: "Miguel",
-			fecha: (new moment().add(-8, 'days')).format("DD/MM/YYYY"),
-			descripcion: "Gracias me encanto.",
-			posicion: _.random(0, 10),
-			foto: "./assets/noimagen.jpg"
-		}
+		
 	];
+	// dataFinix =  [
+	// 	{
+	// 		nombre: "Antonio",
+	// 		fecha: new moment().format("DD/MM/YYYY"),
+	// 		descripcion: "Producto genial muy util y facil de usar.",
+	// 		posicion: _.random(0, 10),
+	// 		foto: "./assets/noimagen.jpg"
+	// 	},
+	// 	{
+	// 		nombre: "Carlos montaño",
+	// 		fecha: (new moment().add(-1, 'days')).format("DD/MM/YYYY"),
+	// 		descripcion: "Me Encanto en Todas Formas Recomendado.",
+	// 		posicion: _.random(0, 10),
+	// 		foto: "./assets/noimagen.jpg"
+	// 	},
+	// 	{
+	// 		nombre: "Rafael",
+	// 		fecha: (new moment().add(-2, 'days')).format("DD/MM/YYYY"),
+	// 		descripcion: "LLego muy rapido y me encanto.",
+	// 		posicion: _.random(0, 10),
+	// 		foto: "./assets/noimagen.jpg"
+	// 	},
+	// 	{
+	// 		nombre: "Estafany",
+	// 		fecha: (new moment().add(-3, 'days')).format("DD/MM/YYYY"),
+	// 		descripcion: "A mi esposo le gusto saludos.",
+	// 		posicion: _.random(0, 10),
+	// 		foto: "./assets/noimagen.jpg"
+	// 	},
+	// 	{
+	// 		nombre: "Ester",
+	// 		fecha: (new moment().add(-4, 'days')).format("DD/MM/YYYY"),
+	// 		descripcion: "Es Muy Genial Gracias.",
+	// 		posicion: _.random(0, 10),
+	// 		foto: "./assets/noimagen.jpg"
+	// 	},
+	// 	{
+	// 		nombre: "Jose",
+	// 		fecha: (new moment().add(-5, 'days')).format("DD/MM/YYYY"),
+	// 		descripcion: "Gracias Tienda Recomendado.",
+	// 		posicion: _.random(0, 10),
+	// 		foto: "./assets/noimagen.jpg"
+	// 	},
+	// 	{
+	// 		nombre: "Olga",
+	// 		fecha: (new moment().add(-6, 'days')).format("DD/MM/YYYY"),
+	// 		descripcion: "Tenia Miedo alcomprar pero me llego bien gracias.",
+	// 		posicion: _.random(0, 10),
+	// 		foto: "./assets/noimagen.jpg"
+	// 	},
+	// 	{
+	// 		nombre: "Cristian",
+	// 		fecha: (new moment().add(-7, 'days')).format("DD/MM/YYYY"),
+	// 		descripcion: "Gracias tienda recomendad.",
+	// 		posicion: _.random(0, 10),
+	// 		foto: "./assets/noimagen.jpg"
+	// 	},
+	// 	{
+	// 		nombre: "Miguel",
+	// 		fecha: (new moment().add(-8, 'days')).format("DD/MM/YYYY"),
+	// 		descripcion: "Gracias me encanto.",
+	// 		posicion: _.random(0, 10),
+	// 		foto: "./assets/noimagen.jpg"
+	// 	}
+	// ];
 	let result = _.map( resultado, ( key )=>{
 		return {
 			nombre: key.nombre,
