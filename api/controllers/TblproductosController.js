@@ -8,7 +8,7 @@ let Procedures = Object();
 const _ = require('lodash');
 const moment = require('moment');
 
-Procedures.querys = async (req, res) => {
+Procedures.querys = async (req, res) => { console.log("Procedures.querys res",req)
 	let params = req.allParams();
 	let resultado = Object();
 	console.log("***", params);
@@ -38,6 +38,12 @@ Procedures.querys = async (req, res) => {
 		});
 	}
 	return res.ok(resultado);
+}
+
+Procedures.updateVideoToken = async(req,res)=>{ console.log("Procedures.updateVideoToken",req)
+ let params = req.allParams();
+  resultado = await Tblusuario.update({id: params.id},{pro_video_token: params.pro_video_token}).fetch();
+  res.status(200).ok({"msg": "toekn de video actualizado"})
 }
 
 Procedures.comentarios = async ( id )=>{
@@ -100,7 +106,7 @@ Procedures.comentarios = async ( id )=>{
 			posicion: _.random(0, 10),
 			foto: "./assets/noimagen.jpg"
 		},
-		
+
 		{
 			nombre: "Olga",
 			fecha: (new moment().add(-6, 'days')).format("DD/MM/YYYY"),
@@ -108,7 +114,7 @@ Procedures.comentarios = async ( id )=>{
 			posicion: _.random(0, 10),
 			foto: "./assets/noimagen.jpg"
 		},
-		
+
 	];
 	// dataFinix =  [
 	// 	{

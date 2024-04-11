@@ -49,7 +49,8 @@ module.exports = {
         type: 'string'
     },
     usu_color_hex:{
-        type: 'string'
+        type: 'string',
+        allowNull: true,
     },
     usu_usu_actualiz:{
         type: 'string'
@@ -70,7 +71,7 @@ module.exports = {
         type: 'string'
     },
     usu_ciudad:{
-        type: 'string'  
+        type: 'string'
     },
     usu_direccion:{
         type: 'string'
@@ -87,7 +88,7 @@ module.exports = {
     },
     usu_apellido:{
         type: 'string'
-    },  
+    },
     usu_fec_nacimiento:{
         type: 'string'
     },
