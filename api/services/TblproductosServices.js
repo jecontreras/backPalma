@@ -28,7 +28,7 @@ Procedures.nextTridy = async ()=>{
 					"pro_activo": 1,
 					"pro_mostrar_agotado": 0,
 					"pro_descripcionbreve": "",
-					"pro_codigo": _.camelCase( ( _.split(detalle.nombre, "-") ) [0] ) || detalle.id_producto,
+					"": _.camelCase( ( _.split(detalle.nombre, "-") ) [0] ) || detalle.id_producto,
 					"pro_usu_creacion": detalle.id_tienda,
 					"pro_usu_actualiz": "",
 					"pro_fec_actualiz": "",

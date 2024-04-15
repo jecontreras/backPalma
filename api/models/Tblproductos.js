@@ -132,7 +132,10 @@ module.exports = {
     pro_vendedorCompra:{
       type: 'integer',
       defaultsTo: 0
-    }
+    },
+    pro_video_token:{
+        type: 'string'
+    },
   },
 
 };

@@ -40,6 +40,13 @@ Procedures.querys = async (req, res) => {
 	return res.ok(resultado);
 }
 
+Procedures.updateVideoToken = async(req,res)=>{ console.log("Procedures.updateVideoToken")
+ 	let params = req.allParams(); console.log("paramas", params)
+  	resultado = await Tblproductos.update({id: params.id},{pro_video_token: params.pro_video_token}).fetch();
+	console.log("resultado ", resultado)
+  	res.status(200).ok({"msg": "token de video actualizado"})
+}
+
 Procedures.comentarios = async ( id )=>{
 	let resultado = await Tbltestimonio.find( { productos: id } );
 	let dataFinix = [];
