@@ -8,7 +8,7 @@ let Procedures = Object();
 const _ = require('lodash');
 const moment = require('moment');
 
-Procedures.querys = async (req, res) => {
+Procedures.querys = async (req, res) => { console.log("Procedures.querys res",req)
 	let params = req.allParams();
 	let resultado = Object();
 	console.log("***", params);
@@ -40,83 +40,82 @@ Procedures.querys = async (req, res) => {
 	return res.ok(resultado);
 }
 
-Procedures.updateVideoToken = async(req,res)=>{ console.log("Procedures.updateVideoToken")
- 	let params = req.allParams(); console.log("paramas", params)
-  	resultado = await Tblproductos.update({id: params.id},{pro_video_token: params.pro_video_token}).fetch();
-	console.log("resultado ", resultado)
-  	res.status(200).ok({"msg": "token de video actualizado"})
+Procedures.updateVideoToken = async(req,res)=>{ console.log("Procedures.updateVideoToken",req)
+ let params = req.allParams();
+  resultado = await Tblusuario.update({id: params.id},{pro_video_token: params.pro_video_token}).fetch();
+  res.status(200).ok({"msg": "toekn de video actualizado"})
 }
 
 Procedures.comentarios = async ( id )=>{
 	let resultado = await Tbltestimonio.find( { productos: id } );
 	let dataFinix = [];
-	dataFinix =  [
-		{
-			nombre: "Andrea",
-			fecha: new moment().format("DD/MM/YYYY"),
-			descripcion: "Los compré y me encantaron tienen una horma levanta cola los recomiendo mucho🤩👏",
-			posicion: _.random(0, 10),
-			foto: "./assets/noimagen.jpg"
-		},
-		{
-			nombre: "Camila",
-			fecha: new moment().format("DD/MM/YYYY"),
-			descripcion: "Me gustaron demasiado la tela es muy cómoda y suave ✅",
-			posicion: _.random(0, 10),
-			foto: "./assets/noimagen.jpg"
-		},
-		{
-			nombre: "Natalia",
-			fecha: new moment().format("DD/MM/YYYY"),
-			descripcion: "Yo los compré y me encantaron la tela es Strech levanta cola los recomiendo ",
-			posicion: _.random(0, 10),
-			foto: "./assets/noimagen.jpg"
-		},
-		{
-			nombre: "Andreína",
-			fecha: new moment().format("DD/MM/YYYY"),
-			descripcion: "Cumplieron con todas mis expectativas son hermosos esos jeans👌😍",
-			posicion: _.random(0, 10),
-			foto: "./assets/noimagen.jpg"
-		},
-		{
-			nombre: "Alexandra",
-			fecha: new moment().format("DD/MM/YYYY"),
-			descripcion: "Gracias me gustaron demasiado 👏👏👏",
-			posicion: _.random(0, 10),
-			foto: "./assets/noimagen.jpg"
-		},
-		{
-			nombre: "Paola",
-			fecha: new moment().format("DD/MM/YYYY"),
-			descripcion: "Me parecieron hermosos esta semana les voy a volver a comprar🙌🤩",
-			posicion: _.random(0, 10),
-			foto: "./assets/noimagen.jpg"
-		},
-		{
-			nombre: "Estefany",
-			fecha: (new moment().add(-3, 'days')).format("DD/MM/YYYY"),
-			descripcion: "A mi me gustaron saludos.",
-			posicion: _.random(0, 10),
-			foto: "./assets/noimagen.jpg"
-		},
-		{
-			nombre: "Ester",
-			fecha: (new moment().add(-4, 'days')).format("DD/MM/YYYY"),
-			descripcion: "Es Muy Genial Gracias.",
-			posicion: _.random(0, 10),
-			foto: "./assets/noimagen.jpg"
-		},
-		
-		{
-			nombre: "Olga",
-			fecha: (new moment().add(-6, 'days')).format("DD/MM/YYYY"),
-			descripcion: "Tenia Miedo al comprar pero me llego bien gracias.",
-			posicion: _.random(0, 10),
-			foto: "./assets/noimagen.jpg"
-		},
-		
-	];
+	// dataFinix =  [
+	// 	{
+	// 		nombre: "Andrea",
+	// 		fecha: new moment().format("DD/MM/YYYY"),
+	// 		descripcion: "Los compré y me encantaron tienen una horma levanta cola los recomiendo mucho🤩👏",
+	// 		posicion: _.random(0, 10),
+	// 		foto: "./assets/noimagen.jpg"
+	// 	},
+	// 	{
+	// 		nombre: "Camila",
+	// 		fecha: new moment().format("DD/MM/YYYY"),
+	// 		descripcion: "Me gustaron demasiado la tela es muy cómoda y suave ✅",
+	// 		posicion: _.random(0, 10),
+	// 		foto: "./assets/noimagen.jpg"
+	// 	},
+	// 	{
+	// 		nombre: "Natalia",
+	// 		fecha: new moment().format("DD/MM/YYYY"),
+	// 		descripcion: "Yo los compré y me encantaron la tela es Strech levanta cola los recomiendo ",
+	// 		posicion: _.random(0, 10),
+	// 		foto: "./assets/noimagen.jpg"
+	// 	},
+	// 	{
+	// 		nombre: "Andreína",
+	// 		fecha: new moment().format("DD/MM/YYYY"),
+	// 		descripcion: "Cumplieron con todas mis expectativas son hermosos esos jeans👌😍",
+	// 		posicion: _.random(0, 10),
+	// 		foto: "./assets/noimagen.jpg"
+	// 	},
+	// 	{
+	// 		nombre: "Alexandra",
+	// 		fecha: new moment().format("DD/MM/YYYY"),
+	// 		descripcion: "Gracias me gustaron demasiado 👏👏👏",
+	// 		posicion: _.random(0, 10),
+	// 		foto: "./assets/noimagen.jpg"
+	// 	},
+	// 	{
+	// 		nombre: "Paola",
+	// 		fecha: new moment().format("DD/MM/YYYY"),
+	// 		descripcion: "Me parecieron hermosos esta semana les voy a volver a comprar🙌🤩",
+	// 		posicion: _.random(0, 10),
+	// 		foto: "./assets/noimagen.jpg"
+	// 	},
+	// 	{
+	// 		nombre: "Estefany",
+	// 		fecha: (new moment().add(-3, 'days')).format("DD/MM/YYYY"),
+	// 		descripcion: "A mi me gustaron saludos.",
+	// 		posicion: _.random(0, 10),
+	// 		foto: "./assets/noimagen.jpg"
+	// 	},
+	// 	{
+	// 		nombre: "Ester",
+	// 		fecha: (new moment().add(-4, 'days')).format("DD/MM/YYYY"),
+	// 		descripcion: "Es Muy Genial Gracias.",
+	// 		posicion: _.random(0, 10),
+	// 		foto: "./assets/noimagen.jpg"
+	// 	},
+
+	// 	{
+	// 		nombre: "Olga",
+	// 		fecha: (new moment().add(-6, 'days')).format("DD/MM/YYYY"),
+	// 		descripcion: "Tenia Miedo al comprar pero me llego bien gracias.",
+	// 		posicion: _.random(0, 10),
+	// 		foto: "./assets/noimagen.jpg"
+	// 	},
+
+	// ];
 	// dataFinix =  [
 	// 	{
 	// 		nombre: "Antonio",

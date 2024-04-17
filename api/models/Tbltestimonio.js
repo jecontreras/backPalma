@@ -19,6 +19,9 @@ module.exports = {
       type: 'integer',
       defaultsTo: 0 // 0 activa, 1 eliminado // 1 aprobando,
     },
+    foto:{
+      type: 'string'
+    },
     nombre:{
       type: 'string'
     },
