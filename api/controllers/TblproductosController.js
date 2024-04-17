@@ -8,7 +8,15 @@ let Procedures = Object();
 const _ = require('lodash');
 const moment = require('moment');
 
-Procedures.querys = async (req, res) => { console.log("Procedures.querys res",req)
+Procedures.getSimply = async (req, res )=>{
+  let params = req.allParams();
+	let resultado = Object();
+	console.log("***", params);
+	resultado = await QuerysServices(Tblproductos, params);
+  return res.ok(resultado);
+}
+
+Procedures.querys = async (req, res) => {
 	let params = req.allParams();
 	let resultado = Object();
 	console.log("***", params);
@@ -30,12 +38,12 @@ Procedures.querys = async (req, res) => { console.log("Procedures.querys res",re
 		ids.push( row.id );
 		//console.log("31*************************", ids )
 		row.galeria = await Tblproductosimagen.find( { where: { producto: ids } } ).limit(6)
-		if( !row.galeria.length ) row.galeria = _.map( row.listColor, (key)=>{
+		/*if( !row.galeria.length ) row.galeria = _.map( row.listColor, (key)=>{
 			return {
 				pri_imagen: key.foto,
 				id: key.id
 			}
-		});
+		});*/
 	}
 	return res.ok(resultado);
 }
@@ -47,7 +55,7 @@ Procedures.updateVideoToken = async(req,res)=>{ console.log("Procedures.updateVi
 }
 
 Procedures.comentarios = async ( id )=>{
-	let resultado = await Tbltestimonio.find( { productos: id } );
+	let resultado = await Tbltestimonio.find( { productos: id, estado: 0 } );
 	let dataFinix = [];
 	// dataFinix =  [
 	// 	{

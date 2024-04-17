@@ -22,6 +22,9 @@ module.exports = {
     foto:{
       type: 'string'
     },
+    fotoEvidence:{
+      type: 'string'
+    },
     nombre:{
       type: 'string'
     },
