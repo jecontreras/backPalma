@@ -195,7 +195,7 @@ Procedures.comentarios = async ( id )=>{
 			fecha: new moment( key.createdAt ).format("DD/MM/YYYY"),
 			descripcion: key.descripcion,
 			posicion: _.random(0, 10),
-			foto: "./assets/noimagen.jpg"
+      ...key
 		}
 	});
 	dataFinix.push( ...result );

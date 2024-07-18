@@ -2,7 +2,7 @@
  * TblventasController
  *
  * @description :: Server-side actions for handling incoming requests.
- * @help        :: See https://sailsjs.com/docs/concepts/actions 
+ * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 let Procedures = Object();
 const _ = require('lodash');
@@ -17,6 +17,14 @@ Procedures.querys = async (req, res)=>{
 		row.pro_clave_int = await Tblproductos.findOne({ id: row.pro_clave_int });
 	}
 	return res.ok(resultado);
+}
+
+Procedures.countVenta = async (req, res)=>{
+	let params = req.allParams();
+    let resultado = Array();
+    console.log("***", params);
+	  resultado = await Tblventas.find( params ).limit(100000000)
+	return res.ok({ data:{ count: resultado.length } });
 }
 
 // Procedures.update = async ( req, res)=>{
