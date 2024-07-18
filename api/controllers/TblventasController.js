@@ -24,7 +24,7 @@ Procedures.countVenta = async (req, res)=>{
     let resultado = Array();
     console.log("***", params);
 	  resultado = await Tblventas.find( params ).limit(100000000)
-	return res.ok({ data:{ count: resultado.length } });
+	return res.ok({ data: resultado.length });
 }
 
 // Procedures.update = async ( req, res)=>{
