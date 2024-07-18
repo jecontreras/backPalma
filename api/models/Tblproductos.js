@@ -136,6 +136,9 @@ module.exports = {
     pro_video_token:{
         type: 'string'
     },
+    empresa:{
+        model: 'empresa'
+    }
   },
 
 };

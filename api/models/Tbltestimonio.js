@@ -33,7 +33,10 @@ module.exports = {
     },
     productos:{
       model: 'tblproductos'
-    }
+    },
+    empresa:{
+      model: 'empresa'
+  }
 
   },
 

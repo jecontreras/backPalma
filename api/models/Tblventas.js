@@ -123,6 +123,9 @@ module.exports = {
     ven_subVendedor:{
         type: 'integer',
         defaultsTo: 0 // 0 no, 1 subVendedor
+    },
+    empresa:{
+        model: 'empresa'
     }
   },
   afterCreate:(valuesToSet, proceed)=>{
