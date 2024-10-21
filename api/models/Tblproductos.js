@@ -138,6 +138,9 @@ module.exports = {
     },
     empresa:{
         model: 'empresa'
+    },
+    position:{
+        type: 'integer'
     }
   },
 
