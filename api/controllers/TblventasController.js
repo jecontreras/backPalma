@@ -15,6 +15,7 @@ Procedures.querys = async (req, res)=>{
 	for(let row of resultado.data){
 		row.usu_clave_int = await Tblusuario.findOne({ id: row.usu_clave_int });
 		row.pro_clave_int = await Tblproductos.findOne({ id: row.pro_clave_int });
+		row.ventasAndCount = await Tblventas.count( { id :  { "!=" : row.id }, ven_telefono_cliente: row.ven_telefono_cliente } )
 	}
 	return res.ok(resultado);
 }
