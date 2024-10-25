@@ -36,6 +36,6 @@ Procedures.querysProduct = async (req, res)=>{
 	// Ordenamos `dataEnd` de mayor a menor según la longitud de `articleData`
 	dataEnd.sort((a, b) => b.articleData.length - a.articleData.length);
 	return res.ok( { data: dataEnd, count: dataEnd.length } );
-} 
+}
 
 module.exports = Procedures;
