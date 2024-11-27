@@ -37,7 +37,12 @@ Procedures.querys = async (req, res) => {
 		ids = _.map( ids, 'id');
 		ids.push( row.id );
 		//console.log("31*************************", ids )
-		row.galeria = await Tblproductosimagen.find( { where: { producto: ids } } ).limit(6)
+		row.galeria = await Tblproductosimagen.find( { where: { producto: ids } } ).limit(6);
+		try {
+			if( row.listaTallas[0].tal_descripcion === 'Unica' ) row.talla = 'Unica';
+		} catch (error) {
+			
+		}
 		/*if( !row.galeria.length ) row.galeria = _.map( row.listColor, (key)=>{
 			return {
 				pri_imagen: key.foto,
