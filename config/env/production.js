@@ -48,7 +48,7 @@ module.exports = {
     ***************************************************************************/
     default: {
       adapter: 'sails-mysql',
-      url: 'mysql://root:43rTjnl16mKxmypbZypwu9szdGouQr3t@df8guk.stackhero-network.com/palma',
+      url: 'mysql://root:u3hk1Sika1gDcBcyqf4fpOTOlRyEpUnO@b9djw9.stackhero-network.com:5827/palma',
       //url: 'mysql://kh1yn4yipz0zec84:gkbelkssgvk0sgvn@en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/d5fh3onnbed1jxem'
       // url: 'mysql://root:83Lmqdfk3gwMPLYGxDePMpiO18NMUIe9@fwra9u.stackhero-network.com/palma',
       // url: 'mysql://rooty:12345@localhost/dbspalmadev',
