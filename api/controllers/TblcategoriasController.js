@@ -25,7 +25,7 @@ Procedures.querysProduct = async (req, res)=>{
 	resultado = await QuerysServices(Tblcategorias, params);
 	let dataEnd = Array();
 	for(let row of resultado.data){
-		let articleData = await Tblproductos.find( { where: { pro_categoria: row.id, pro_estado: 0, empresa: params.empresa }, sort: "position DESC" } );
+		let articleData = await Tblproductos.find( { where: { pro_categoria: row.id, pro_activo: 0, empresa: params.empresa }, sort: "position DESC" } );
 		if( articleData.length ) {
 			dataEnd.push( {
 				articleData: articleData,
