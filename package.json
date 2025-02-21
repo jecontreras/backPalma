@@ -17,7 +17,7 @@
     "nodemon": "^3.0.3",
     "request": "^2.88.2",
     "s3": "^4.4.0",
-    "sails": "^1.2.3",
+    "sails": "^1.5.14",
     "sails-hook-grunt": "^4.0.0",
     "sails-hook-orm": "^2.1.1",
     "sails-hook-sockets": "^2.0.0",
