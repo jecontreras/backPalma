@@ -19,7 +19,7 @@ Procedures.registrarVisita = async (req, res)=>{
       let { producto_id } = req.body;
       let cliente_ip = req.ip || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
       let fechaHoy = new Date().toISOString().split('T')[0]; // Solo la fecha YYYY-MM-DD
-
+      console.log("**22", producto_id, cliente_ip, fechaHoy );
       // Verificar si ya existe una visita hoy para este producto y cliente
       let visitaExistente = await Tblestadisticas.findOne({
         where: { producto_id, cliente_ip, fecha: fechaHoy }

@@ -15,6 +15,9 @@ module.exports = {
     cliente_ip:{
       type: 'string',
       required: true
+    },
+    fecha:{
+      type: 'string'
     }
   },
 
