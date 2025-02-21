@@ -51,6 +51,9 @@ module.exports = {
     },
     dominio:{
         type: 'string'
+    },
+    textTransfer:{
+        type: 'string'
     }
   },
 
