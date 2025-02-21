@@ -37,20 +37,23 @@ Procedures.registrarVisita = async (req, res)=>{
 },
 
 Procedures.obtenerEstadisticas =async (req, res)=>{
-    try {
-        let estadisticas = await Tblproductos.findAll({
-        include: [{
-            model: Tblestadisticas,
-            attributes: [[Sails.Sequelize.fn('COUNT', Sails.Sequelize.col('tblestadisticas.id')), 'total_visitas']],
-            required: false
-        }],
-        group: ['tblproductos.id']
-        });
+  try {
+    let sql = `
+      SELECT
+        p.id,
+        p.pro_nombre,
+        COUNT(e.id) AS total_visitas
+      FROM tblproductos p
+      LEFT JOIN tblestadisticas e ON p.id = e.producto_id
+      GROUP BY p.id
+    `;
 
-        return res.json(estadisticas);
-    } catch (error) {
-        return res.status(500).json({ success: false, message: "Error al obtener estadísticas", error });
-    }
+    let result = await sails.getDatastore().sendNativeQuery(sql);
+
+    return res.json(result.rows); // Enviar los datos en JSON
+  } catch (error) {
+    return res.status(500).json({ success: false, message: "Error al obtener estadísticas", error });
+  }
 }
 
 module.exports = Procedures;
