@@ -8,7 +8,7 @@
 module.exports = {
 
     attributes: {
-  
+
       pro_nombre:{
           type: 'string'
       },
@@ -141,9 +141,12 @@ module.exports = {
       },
       empresa:{
           model: 'empresa'
+      },
+      ventaPorWhatsApp:{
+        type: 'integer',
+        defaultsTo: 0
       }
     },
-  
+
   };
-  
-  
+
