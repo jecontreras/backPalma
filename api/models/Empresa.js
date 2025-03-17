@@ -54,7 +54,9 @@ module.exports = {
     },
     textTransfer:{
         type: 'string'
-    }
+    },
+    plantilla: { type: 'string', defaultsTo: 'plantilla1' }, // Plantilla seleccionada
+    configuracion: { type: 'json', defaultsTo: {} } // Configuración de apariencia
   },
 
 };
