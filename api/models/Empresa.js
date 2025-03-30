@@ -56,7 +56,26 @@ module.exports = {
         type: 'string'
     },
     plantilla: { type: 'string', defaultsTo: 'plantilla1' }, // Plantilla seleccionada
-    configuracion: { type: 'json', defaultsTo: {} } // Configuración de apariencia
+    configuracion: { type: 'json', defaultsTo: {} }, // Configuración de apariencia
+    urlSocket:{
+        type: 'string'
+    },
+    urlBackend:{
+        type: 'string'
+    },
+    urlBackendFile:{
+        type: 'string'
+    },
+    userDropi:{
+        type: 'string'
+    },
+    claveDropi:{
+        type: 'string'
+    },
+    rolDropi:{
+        type: 'string'
+    }
+
   },
 
 };
