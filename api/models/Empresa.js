@@ -74,6 +74,9 @@ module.exports = {
     },
     rolDropi:{
         type: 'string'
+    },
+    txtCompra:{
+        type: 'string'
     }
 
   },
