@@ -66,6 +66,9 @@ module.exports = {
     urlBackendFile:{
         type: 'string'
     },
+    urlBackendSocial:{
+        type: 'string'
+    },
     userDropi:{
         type: 'string'
     },

@@ -120,13 +120,39 @@ module.exports = {
     ven_imagen_guia:{
         type: 'string'
     },
+    transport:{
+        type: 'string'
+    },
+    stateGuide:{
+        type: 'string'
+    },
+    printInt:{
+        type: 'integer',
+        defaultsTo: 0 // 0 no imprimido, 1 imprimido
+    },
+    idDropi:{
+        type: 'string'
+    },
+    priceFlete:{
+        type: 'integer'
+    },
     ven_subVendedor:{
         type: 'integer',
         defaultsTo: 0 // 0 no, 1 subVendedor
     },
     empresa:{
         model: 'empresa'
+    },
+    departament:{
+        type: 'string'
+    },
+    departamento:{
+        type: 'string'
+    },
+    idCiudad:{
+        type: 'integer'
     }
+
   },
   afterCreate:(valuesToSet, proceed)=>{
       valuesToSet.create = new moment().format('DD-MM-YYYY');
