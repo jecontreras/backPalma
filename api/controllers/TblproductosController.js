@@ -241,13 +241,14 @@ Procedures.filtroStore = async( req, res )=>{
 	console.log("**********CONSULTADO DBS PRICE ARTICLE***************");
 	if( params.where.or ){
 	  let ids = await Procedures.idRecordsPro( params );
-	  resultado = await QuerysServices( PriceArticle, { where: { article: ids, user: params.where.user } } );
+	  resultado = await QuerysServices( PriceArticle, { where: { article: ids, /*user: params.where.user*/ } } );
 	}else{
 	  resultado = await QuerysServices( PriceArticle, params );
 	}
   }
   else {
-	let finix = cacheManA.filter( item => item.user === params.where.user && item.state === params.where.state );
+	let finix = cacheManA.filter( item => /*item.user === params.where.user && */item.state === params.where.state );
+	console.log("**251", finix)
 	resultado = { count: finix.length, data: [] };
 	if( params.where.position ) {
 	  finix = _.orderBy( finix, ['position'], ['asc'])
@@ -305,6 +306,6 @@ Procedures.idRecordsPro = async( params )=>{
 function getRandomInt(max) {
 	return Math.floor(Math.random() * max);
   }
-  
+
 module.exports = Procedures;
 
