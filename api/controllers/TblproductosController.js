@@ -302,5 +302,9 @@ Procedures.idRecordsPro = async( params )=>{
   });
 }
 
+function getRandomInt(max) {
+	return Math.floor(Math.random() * max);
+  }
+  
 module.exports = Procedures;
 
