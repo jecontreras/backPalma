@@ -221,5 +221,86 @@ Procedures.tridy = async (req, res) => {
 
 }
 
+Procedures.filtroStore = async( req, res )=>{
+	let resultado = Object();
+  let params = req.allParams();
+  if( params.where.idPrice ) {
+	params.where.user = params.where.idPrice;
+  delete params.where.idPrice;
+  }
+  if( params.where.pro_activo >= 0  ) {
+	params.where.state = params.where.pro_activo;
+	delete params.where.pro_activo;
+  }
+  if( params.where.pro_categoria ) {
+	delete params.where.pro_categoria;
+  }
+  let cacheManA = [];
+  if( !params.where.or ) cacheManA = [] || _.cloneWith( await Cache.leer('priceArticle') );
+  if( cacheManA.length === 0 ) {
+	console.log("**********CONSULTADO DBS PRICE ARTICLE***************");
+	if( params.where.or ){
+	  let ids = await Procedures.idRecordsPro( params );
+	  resultado = await QuerysServices( PriceArticle, { where: { article: ids, user: params.where.user } } );
+	}else{
+	  resultado = await QuerysServices( PriceArticle, params );
+	}
+  }
+  else {
+	let finix = cacheManA.filter( item => item.user === params.where.user && item.state === params.where.state );
+	resultado = { count: finix.length, data: [] };
+	if( params.where.position ) {
+	  finix = _.orderBy( finix, ['position'], ['asc'])
+	  //finix = finix.filter( item => item.position >= params.where.position );
+	  //console.log("**ENTRE 291", finix.length )
+	}
+	finix = _.clone( Cache.paginate( finix, params.limit, ( ( params.page || params.skip ) + 1 ) ) );
+	//console.log("***293", params )
+	resultado.data = finix;
+  }
+  let dataEnd = Array();
+  for( let row of resultado.data ){
+	row.idAleatorio = getRandomInt(1000000000000);
+	try {
+	  if( !row.article.id ) {
+		let cacheManAr = [] || _.cloneWith( await Cache.leer('products') );
+		if( cacheManAr.length === 0 ) {
+		  row.article = await Tblproductos.find( { id: row.article, pro_activo: 0 } );
+		  row.article = row.article[0];
+		  //console.log("******521", row)
+		}
+		else row.article = cacheManAr.find( off => off.id === row.article && off.pro_activo === 0 );
+	  }
+	} catch (error) {
+	  if( !row.article ) {
+		let cacheManAr = [] || _.cloneWith( await Cache.leer('products') );
+		//console.log("*****525", row)
+		if( cacheManAr.length === 0 ) row.article = await Tblproductos.findOne( { id: row.article, pro_activo: 0 } );
+		else row.article = cacheManAr.find( off => off.id === row.article && off.pro_activo === 0 );
+	  }
+	}
+	row.pro_uni_venta = row.price || row.pro_uni_venta;
+	row.cobreEnvio = row.envio || 0; // 0 si 1 no
+	try {
+	  row.pro_vendedor = row.price2 != null ? row.price2 : row.article.pro_vendedor;
+	  //console.log("****532", row)
+	  if( row.article.id ) dataEnd.push( {...row.article,pro_uni_venta: row.price, cobreEnvio: row.cobreEnvio, pro_vendedor:row.pro_vendedor, idAleatorio: row.idAleatorio } );
+	} catch (error) { /*console.error("EEEEROR CONTROLADO", error ) */}
+  }
+  if( ( params.where.pro_categoria ) ) {
+	if( ( params.where.pro_categoria !==0 && params.where.pro_categoria !==800 ) ) dataEnd = dataEnd.filter( item => item.pro_categoria === params.where.pro_categoria )
+  }
+  if( !params.where.position ) dataEnd = _.orderBy( dataEnd, ['idAleatorio'], ['desc'])
+  return res.ok({ status:200, data: dataEnd, count: dataEnd.length } );
+}
+
+Procedures.idRecordsPro = async( params )=>{
+  return new Promise( async ( resolve ) =>{
+	let result = await Tblproductos.find( { where: { or: params.where.or } } );
+	result = _.map( result, 'id');
+	resolve( result );
+  });
+}
+
 module.exports = Procedures;
 
