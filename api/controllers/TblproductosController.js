@@ -16,6 +16,253 @@ Procedures.getSimply = async (req, res )=>{
   return res.ok(resultado);
 }
 
+Procedures.cargaCity = async( req, res )=>{
+	let JsonData = [
+		{
+			"id": 81,
+			"name": "AMAZONAS",
+			"country_id": 1,
+			"department_code": null
+		},
+		{
+			"id": 13,
+			"name": "ANTIOQUIA",
+			"country_id": 1,
+			"department_code": "05"
+		},
+		{
+			"id": 39,
+			"name": "ARAUCA",
+			"country_id": 1,
+			"department_code": null
+		},
+		{
+			"id": 91,
+			"name": "ARCHIPIELAGO DE SAN ANDRES",
+			"country_id": 1,
+			"department_code": "88"
+		},
+		{
+			"id": 22,
+			"name": "ATLANTICO",
+			"country_id": 1,
+			"department_code": "08"
+		},
+		{
+			"id": 18,
+			"name": "BOLIVAR",
+			"country_id": 1,
+			"department_code": "13"
+		},
+		{
+			"id": 15,
+			"name": "BOYACA",
+			"country_id": 1,
+			"department_code": "15"
+		},
+		{
+			"id": 5,
+			"name": "CALDAS",
+			"country_id": 1,
+			"department_code": "17"
+		},
+		{
+			"id": 38,
+			"name": "CAQUETA",
+			"country_id": 1,
+			"department_code": "18"
+		},
+		{
+			"id": 7,
+			"name": "CASANARE",
+			"country_id": 1,
+			"department_code": "85"
+		},
+		{
+			"id": 28,
+			"name": "CAUCA",
+			"country_id": 1,
+			"department_code": "19"
+		},
+		{
+			"id": 4,
+			"name": "CESAR",
+			"country_id": 1,
+			"department_code": "20"
+		},
+		{
+			"id": 54,
+			"name": "CHOCO",
+			"country_id": 1,
+			"department_code": null
+		},
+		{
+			"id": 20,
+			"name": "CORDOBA",
+			"country_id": 1,
+			"department_code": "23"
+		},
+		{
+			"id": 3,
+			"name": "CUNDINAMARCA",
+			"country_id": 1,
+			"department_code": "25"
+		},
+		{
+			"id": 92,
+			"name": "GUAINIA",
+			"country_id": 1,
+			"department_code": null
+		},
+		{
+			"id": 94,
+			"name": "GUAJIRA",
+			"country_id": 1,
+			"department_code": null
+		},
+		{
+			"id": 51,
+			"name": "GUAVIARE",
+			"country_id": 1,
+			"department_code": null
+		},
+		{
+			"id": 49,
+			"name": "HUILA",
+			"country_id": 1,
+			"department_code": "41"
+		},
+		{
+			"id": 9,
+			"name": "LA GUAJIRA",
+			"country_id": 1,
+			"department_code": "44"
+		},
+		{
+			"id": 16,
+			"name": "MAGDALENA",
+			"country_id": 1,
+			"department_code": "47"
+		},
+		{
+			"id": 1,
+			"name": "META",
+			"country_id": 1,
+			"department_code": "50"
+		},
+		{
+			"id": 40,
+			"name": "NARIÑO",
+			"country_id": 1,
+			"department_code": "52"
+		},
+		{
+			"id": 17,
+			"name": "NORTE DE SANTANDER",
+			"country_id": 1,
+			"department_code": "54"
+		},
+		{
+			"id": 67,
+			"name": "PUTUMAYO",
+			"country_id": 1,
+			"department_code": "86"
+		},
+		{
+			"id": 19,
+			"name": "QUINDIO",
+			"country_id": 1,
+			"department_code": "63"
+		},
+		{
+			"id": 21,
+			"name": "RISARALDA",
+			"country_id": 1,
+			"department_code": "66"
+		},
+		{
+			"id": 8,
+			"name": "SANTANDER",
+			"country_id": 1,
+			"department_code": "68"
+		},
+		{
+			"id": 34,
+			"name": "SUCRE",
+			"country_id": 1,
+			"department_code": "70"
+		},
+		{
+			"id": 11,
+			"name": "TOLIMA",
+			"country_id": 1,
+			"department_code": "73"
+		},
+		{
+			"id": 12,
+			"name": "VALLE",
+			"country_id": 1,
+			"department_code": "76"
+		},
+		{
+			"id": 64,
+			"name": "VAUPES",
+			"country_id": 1,
+			"department_code": null
+		},
+		{
+			"id": 70,
+			"name": "VICHADA",
+			"country_id": 1,
+			"department_code": null
+		}
+	];
+	for( let row of JsonData ){
+	 let result = await Procedures.getHttp( row.id );
+	 //console.log("***222", result)
+	row.listCity = result.objects.cities;
+	//console.log("11", row )
+	}
+	return res.ok(JsonData);
+}
+
+Procedures.getHttp= async( idDep )=>{
+	let resultado = Array();
+	let url = `https://socialmarketingapi2-12ab86fb3d47.herokuapp.com/googleSheet/getCity`;
+	let headers = {
+		'Accept': 'application/json, text/plain, */*',
+		'Accept-Language': 'es-US,es-419;q=0.9,es;q=0.8,en;q=0.7,und;q=0.6,pl;q=0.5,pt;q=0.4',
+		'Connection': 'keep-alive',
+		'Content-Type': 'application/json',
+		'Origin': 'http://localhost:4400',
+		'Referer': 'http://localhost:4400/',
+		'Sec-Fetch-Dest': 'empty',
+		'Sec-Fetch-Mode': 'cors',
+		'Sec-Fetch-Site': 'cross-site',
+		'User-Agent': 'Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36',
+		'sec-ch-ua': '"Chromium";v="136", "Google Chrome";v="136", "Not.A/Brand";v="99"',
+		'sec-ch-ua-mobile': '?1',
+		'sec-ch-ua-platform': '"Android"',
+		'Cookie': 'sails.sid=s%3AxT5ut8SsiSsQ0F3Bl_N40CaSs_kCgFkI.nxQHiaIxaztZmBXpgeBoUkbmQPlN6FF9RhcaX0jDS%2FI'
+	};
+	let body = JSON.stringify({
+		"where": {
+			"idDept": idDep,
+			"rate_type": "CON RECAUDO"
+		  },
+		  "skip": 0,
+		  "limit": 10
+	  });
+
+	resultado = await HttpService.request(url, body, false, headers, {}, 'POST');
+	//console.log("************", resultado)
+	try {
+		return JSON.parse( resultado ) || [];
+	} catch (error) {
+		return [];
+	}
+}
+
 Procedures.querys = async (req, res) => {
 	let params = req.allParams();
 	let resultado = Object();
