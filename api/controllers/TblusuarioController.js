@@ -155,5 +155,13 @@ Procedures.guardarPunto = async(req, res)=>{
   return res.status(200).send( { status:200, data:"ok" });
 }
 
+Procedures.countVenta = async (req, res)=>{
+	let params = req.allParams();
+    let resultado = Array();
+    console.log("***", params);
+	  resultado = await Tblusuario.find( params ).limit(100000000)
+	return res.ok({ data: resultado.length });
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = Procedures;
