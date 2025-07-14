@@ -21,7 +21,7 @@ module.exports = {
       type: 'string',
       allowNull: true,
     },
-    idVventa:{
+    idVenta:{
       model: 'tblventas',
       required: true
     }
