@@ -27,8 +27,7 @@ module.exports = {
         required: true
     },
     ven_indicativo_cliente:{
-        type: 'string',
-        required: true
+        type: 'string'
     },
     ven_ciudad:{
         type: 'string'
