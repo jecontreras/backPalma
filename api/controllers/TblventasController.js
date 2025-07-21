@@ -44,17 +44,21 @@ Procedures.create = async (req, res )=>{
 	try {
 		result = await Tblventas.create( _.clone( params ) ).fetch();
 		let empresaTxt = await Empresa.findOne( { where: { id: params.empresa } } );
-		await MensajeService.envioWhatsapp(
-			{
-			  to: "57"+params.ven_telefono_cliente,
-			  body: empresaTxt.txtCompra + ` Orden Pendiente recibida #${ result.id }
-				Nombre del Cliente: ${ result.ven_nombre_cliente }
-				fecha Notificado: ${ result.ven_fecha_venta }
-				En espera de tu Comprobante de pago...
-				${ result.ven_tipo === 'PAGO ADELANTADO' ? 'link de pago: https://payco.link/4f895b36-416f-4db8-a547-ca8022f23d6d' : '' } `,
-			  urlMedios: "",
-			  type: "txt"
-			} );
+		try {
+			await MensajeService.envioWhatsapp(
+				{
+				  to: "57"+params.ven_telefono_cliente,
+				  body: empresaTxt.txtCompra + ` Orden Pendiente recibida #${ result.id }
+					Nombre del Cliente: ${ result.ven_nombre_cliente }
+					fecha Notificado: ${ result.ven_fecha_venta }
+					En espera de tu Comprobante de pago...
+					${ result.ven_tipo === 'PAGO ADELANTADO' ? 'link de pago: https://payco.link/4f895b36-416f-4db8-a547-ca8022f23d6d' : '' } `,
+				  urlMedios: "",
+				  type: "txt"
+				} );	
+		} catch (error) {
+			result = result;
+		}
 	} catch (error) {
 		console.log("***59", error )
 		result = { data: "Error"}
