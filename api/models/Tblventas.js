@@ -26,6 +26,10 @@ module.exports = {
         type: 'string',
         required: true
     },
+    ven_indicativo_cliente:{
+        type: 'string',
+        required: true
+    },
     ven_ciudad:{
         type: 'string'
     },
@@ -96,7 +100,7 @@ module.exports = {
     },
     ven_estado:{
         type: 'integer',
-        defaultsTo: 0 // 0 activa, 1 Aprobado, 2, Rechazado, 3, eliminado, 4 Factura Automatica de puntos
+        defaultsTo: 0 // 0 activa, 1 Aprobado, 2, Rechazado, 3, eliminado, 4 Factura Automatica de puntos 5 imprimido
     },
     nombreProducto:{
         type: 'string'
