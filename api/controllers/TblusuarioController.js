@@ -61,7 +61,7 @@ Procedures.encryptedPassword = (password) =>{
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Procedures.login = async function(req, res){
-    Tblusuario.findOne({usu_email: req.param('usu_email')}).populate('usu_perfil').populate('cabeza').exec(function(err, user){
+    Tblusuario.findOne({usu_email: req.param('usu_email')}).populate('usu_perfil').populate('cabeza').populate('empresa').exec(function(err, user){
         if(err) return res.send({'success': false,'message': 'Peticion fallida','data': err});
         if(!user) return res.send({'success': false,'message': 'Usuario no encontrado','data': user});
         Passwords.checkPassword({
