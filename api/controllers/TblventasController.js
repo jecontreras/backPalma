@@ -45,7 +45,7 @@ Procedures.create = async (req, res )=>{
 		result = await Tblventas.create( _.clone( params ) ).fetch();
 		let empresaTxt = await Empresa.findOne( { where: { id: params.empresa } } );
 		try {
-			await MensajeService.envioWhatsapp(
+			MensajeService.envioWhatsapp(
 				{
 				  to: "57"+params.ven_telefono_cliente,
 				  body: empresaTxt.txtCompra + ` Orden Pendiente recibida #${ result.id }
