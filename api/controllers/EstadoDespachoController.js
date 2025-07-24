@@ -1,12 +1,13 @@
 module.exports = {
     createEstado: async function (req, res) {
       try {
-        const { fecha, descripcion, transporte } = req.body;
+        const { fecha, descripcion, transporte ,idVenta} = req.body;
   
         const nuevoEstado = await EstadoDespacho.create({
           fecha,
           descripcion,
-          transporte
+          transporte,
+          idVenta
         }).fetch();
   
         return res.json(nuevoEstado);

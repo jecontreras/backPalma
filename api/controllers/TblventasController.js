@@ -2,70 +2,112 @@
  * TblventasController
  *
  * @description :: Server-side actions for handling incoming requests.
- * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
-let Procedures = Object();
+
 const _ = require('lodash');
+const Procedures = {};
 
-Procedures.querys = async (req, res)=>{
-	let params = req.allParams();
-    let resultado = Object();
-    console.log("***", params);
-	resultado = await QuerysServices(Tblventas, params);
-	for(let row of resultado.data){
-		row.usu_clave_int = await Tblusuario.findOne({ id: row.usu_clave_int });
-		row.pro_clave_int = await Tblproductos.findOne({ id: row.pro_clave_int });
-		row.ventasAndCount = await Tblventas.count( { id :  { "!=" : row.id }, ven_telefono_cliente: row.ven_telefono_cliente } )
-	}
-	return res.ok(resultado);
-}
+Procedures.querys = async (req, res) => {
+  const params = req.allParams();
+  console.log("*** Params Querys:", params);
 
-Procedures.countVenta = async (req, res)=>{
-	let params = req.allParams();
-    let resultado = Array();
-    console.log("***", params);
-	  resultado = await Tblventas.find( params ).limit(100000000)
-	return res.ok({ data: resultado.length });
-}
+  try {
+    const resultado = await QuerysServices(Tblventas, params);
+    for (let row of resultado.data) {
+      row.usu_clave_int = await Tblusuario.findOne({ id: row.usu_clave_int });
+      row.pro_clave_int = await Tblproductos.findOne({ id: row.pro_clave_int });
+      row.ventasAndCount = await Tblventas.count({
+        id: { "!=": row.id },
+        ven_telefono_cliente: row.ven_telefono_cliente
+      });
+    }
+    return res.ok(resultado);
+  } catch (error) {
+    console.error("❌ Error en querys:", error);
+    return res.serverError({ error: 'Error consultando ventas' });
+  }
+};
 
-// Procedures.update = async ( req, res)=>{
-// 	let  params = req.allParams();
-// 	let resultado = Object();
-// 	params = _.omit(params, ['id', 'createdAt', 'updatedAt']);
-// 	params.usu_clave_int = await Tblusuario.findOne({ usu_email: params.ven_usu_creacion });
-// 	params.usu_clave_int = params.usu_clave_int.id;
-// 	resultado = await Tblventas.create( params );
-// 	return res.ok(resultado);
-// }
+Procedures.countVenta = async (req, res) => {
+  const params = req.allParams();
+  console.log("*** Params Count:", params);
 
-Procedures.create = async (req, res )=>{
-	let params = req.allParams();
-	let result = Object();
-	try {
-		result = await Tblventas.create( _.clone( params ) ).fetch();
-		let empresaTxt = await Empresa.findOne( { where: { id: params.empresa } } );
-		try {
-			MensajeService.envioWhatsapp(
-				{
-				  to: "57"+params.ven_telefono_cliente,
-				  body: empresaTxt.txtCompra + ` Orden Pendiente recibida #${ result.id }
-					Nombre del Cliente: ${ result.ven_nombre_cliente }
-					fecha Notificado: ${ result.ven_fecha_venta }
-					En espera de tu Comprobante de pago...
-					${ result.ven_tipo === 'PAGO ADELANTADO' ? 'link de pago: https://payco.link/4f895b36-416f-4db8-a547-ca8022f23d6d' : '' } `,
-				  urlMedios: "",
-				  type: "txt"
-				} );	
-		} catch (error) {
-			result = result;
-		}
-	} catch (error) {
-		console.log("***59", error )
-		result = { data: "Error"}
-	}
-	return res.status( 200 ).send( result );
-}
+  try {
+    const ventas = await Tblventas.find(params).limit(100000000);
+    return res.ok({ data: ventas.length });
+  } catch (error) {
+    console.error("❌ Error en countVenta:", error);
+    return res.serverError({ error: 'Error contando ventas' });
+  }
+};
 
+Procedures.create = async (req, res) => {
+  const params = req.allParams();
+  let result;
 
+  try {
+    result = await Tblventas.create(_.clone(params)).fetch();
+    const empresaTxt = await Empresa.findOne({ id: params.empresa });
+
+    // ✉️ Mensaje estructurado con íconos
+    const mensaje = `${empresaTxt.txtCompra || '🛒 *Orden de compra recibida*'}
+
+📦 *Orden ID:* #${result.id}
+🏪 *Tienda:* ${empresaTxt.nombreTienda}
+🙋‍♂️ *Cliente:* ${result.ven_nombre_cliente}
+🗓️ *Fecha:* ${result.ven_fecha_venta}
+🔢 *Cantidad:* ${params.ven_cantidad}
+💰 *Total:* $${params.ven_precio}
+
+📩 En breve recibirás más información.`;
+
+    // Enviar por WhatsApp
+    await HttpService.request(
+      'http://localhost:3001/enviar-texto',
+      JSON.stringify({
+        tiendaId: `Tienda-${params.empresa}`,
+        numero: result.ven_telefono_cliente,
+        mensaje
+      }),
+      false,
+      { 'Content-Type': 'application/json' },
+      {},
+      'POST'
+    );
+
+  } catch (error) {
+    console.error("❌ Error en create:", error);
+    return res.status(500).send({ error: 'No se pudo registrar la venta' });
+  }
+
+  return res.ok(result);
+};
+
+Procedures.enviarFacturaPdf = async (req, res) => {
+  const { tiendaId, numeroCliente, url, nombreArchivo, tipo, mensaje } = req.body;
+
+  try {
+    await HttpService.request(
+      'http://localhost:3001/api/enviar-archivo-desde-url',
+      JSON.stringify({
+        tiendaId,
+        numero: numeroCliente,
+        url,
+        tipo, // 'imagen', 'pdf', 'video', 'audio'
+        nombreArchivo,
+        mensaje
+      }),
+      false,
+      { 'Content-Type': 'application/json' },
+      {},
+      'POST'
+    );
+
+    return res.ok({ data: "📤 Archivo enviado correctamente" });
+  } catch (error) {
+    console.error("❌ Error al enviar archivo:", error);
+    return res.serverError({ error: 'No se pudo enviar el archivo' });
+  }
+};
 
 module.exports = Procedures;

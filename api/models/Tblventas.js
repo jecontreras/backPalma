@@ -154,6 +154,10 @@ module.exports = {
     },
     idCiudad:{
         type: 'integer'
+    },
+    guideEnviado:{
+        type: 'integer', //0 no 1 si
+        defaultsTo: 0 
     }
 
   },
